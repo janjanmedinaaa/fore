@@ -43,5 +43,77 @@
         "body": [
             "<content>\n\t\n</content>"
         ]
+    },
+    "Heading 1": {
+        "prefix": "h1",
+        "body": [
+            "<h1></h1>"
+        ]
+    },
+    "Heading 2": {
+        "prefix": "h2",
+        "body": [
+            "<h2></h2>"
+        ]
+    },
+    "Heading 3": {
+        "prefix": "h3",
+        "body": [
+            "<h3></h3>"
+        ]
+    },
+    "Heading 4": {
+        "prefix": "h4",
+        "body": [
+            "<h4></h4>"
+        ]
+    },
+    "Heading 5": {
+        "prefix": "h5",
+        "body": [
+            "<h5></h5>"
+        ]
+    },
+    "Heading 6": {
+        "prefix": "h6",
+        "body": [
+            "<h6></h6>"
+        ]
+    },
+    "Bold": {
+        "prefix": "b",
+        "body": [
+            "<b></b>"
+        ]
+    },
+    "Paragraph": {
+        "prefix": "p",
+        "body": [
+            "<p></p>"
+        ]
+    },
+    "Anchors": {
+        "prefix": "a",
+        "body": [
+            "<a href=\"\"></a>"
+        ]
+    },
+    "Div": {
+        "prefix": "div",
+        "body": [
+            "<div></div>"
+        ]
+    },
+    "Nav": {
+        "prefix": "nav",
+        "body": [
+            "<nav></nav>"
+        ]
+    },
+    "Image": {
+        "prefix": "img",
+        "body": [
+            "<img src=\"\" />"
+        ]
     }
 }
