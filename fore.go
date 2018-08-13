@@ -204,6 +204,33 @@ func getjson(filename string) string {
 	return r.ReplaceAllString(string(dat), "")
 }
 
+/****** Get Variable Values ******/
+
+func getvariables(line string, keyname string) string {
+	stringsfile := getjson("strings.json")
+	vars := checkvariables(line)
+	
+	for _, tempvars := range vars {
+		//This removes the @ symbol of the variable
+		newvars := strings.Replace(tempvars, "@", "", -1)
+
+		// Checks if variable name (strings) has an equivalent
+		// Key in the JSON File (stringsfile)
+		valueGlobal := gjson.Get(stringsfile, newvars)
+		valueLocal := gjson.Get(stringsfile, keyname + "." + newvars)
+
+		//So if value is not null (meaning it has an equivalent)
+		if valueLocal.Str != "" {
+			//It switches the variable (strings) to the key value (value)
+			line = strings.Replace(line, tempvars, valueLocal.Str, -1)
+		} else if valueGlobal.Str != "" {
+			line = strings.Replace(line, tempvars, valueGlobal.Str, -1)
+		}
+	}
+
+	return escape(line)
+}
+
 /****** Get Current Working Directory ******/
 
 func pwd() string{
@@ -245,31 +272,9 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 	dat, _ := ioutil.ReadFile(pwd + "/Fore/" + filename)
 
 	splitfile := strings.Split(string(dat), "\n")
-
-	stringsfile := getjson("strings.json")
 	
 	for _, line := range splitfile {
-		vars := checkvariables(line)
-	
-		for _, tempvars := range vars {
-			//This removes the @ symbol of the variable
-			newvars := strings.Replace(tempvars, "@", "", -1)
-
-			// Checks if variable name (strings) has an equivalent
-			// Key in the JSON File (stringsfile)
-			valueGlobal := gjson.Get(stringsfile, newvars)
-			valueLocal := gjson.Get(stringsfile, filenamefunc(filename) + "." + newvars)
-
-			//So if value is not null (meaning it has an equivalent)
-			if valueLocal.Str != "" {
-				//It switches the variable (strings) to the key value (value)
-				line = strings.Replace(line, tempvars, valueLocal.Str, -1)
-			} else if valueGlobal.Str != "" {
-				line = strings.Replace(line, tempvars, valueGlobal.Str, -1)
-			}
-		}
-
-		line = escape(line)
+		line = getvariables(line, filenamefunc(filename))
 
 		if importcheck == 0 && stylecheck == 0 && scriptcheck == 0 && contentcheck == 0 {
 			switch {
@@ -318,22 +323,7 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 					splitcomp := strings.Split(string(dat), "\n")
 		
 					for _, compline := range splitcomp {
-						vars := checkvariables(compline)
-	
-						for _, tempvars := range vars {
-							newvars := strings.Replace(tempvars, "@", "", -1)
-
-							valueGlobal := gjson.Get(stringsfile, newvars)
-							valueLocal := gjson.Get(stringsfile, checkcomponent(line) + "." + newvars)
-
-							if valueLocal.Str != "" {
-								compline = strings.Replace(compline, tempvars, valueLocal.Str, -1)
-							} else if valueGlobal.Str != "" {
-								compline = strings.Replace(compline, tempvars, valueGlobal.Str, -1)
-							}
-						}
-
-						compline = escape(compline)
+						compline = getvariables(compline, checkcomponent(line))
 						content = content + gettabs(line) + compline + "\n"
 					}
 				default: 
