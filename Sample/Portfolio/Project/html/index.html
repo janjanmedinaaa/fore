@@ -1,0 +1,201 @@
+<html>
+	<head>
+		<title>My Portfolio</title>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
+	    <link rel="stylesheet" href="../ezss/css/ezss.css" />
+	    <link rel="stylesheet" href="../css/index.css" />
+	    <script src="../ezss/js/ezss.js"></script>
+	    <script src="../js/index.js"></script>
+		</head>
+	<body>
+	    <div class="message-container">
+	        <div class="ezss-alert alert-danger" id="message-fail">
+	            <div class="alert-icon">
+	                <img src="../assets/message-icon.png" class="message-icon"/>
+	            </div>
+	            <div class="alert-content">
+	                <p class="alert-title">Message not sent!</p>
+	                <p class="alert-body">
+	                    Make sure to validate all information first. All inputs are required!
+	               </p>
+	            </div>
+	            <div class="alert-exit">
+	                <span>&#10006;</span>
+	            </div>
+	        </div>
+	        <div class="ezss-alert alert-success" id="message-success">
+	            <div class="alert-icon">
+	                <img src="../assets/message-icon.png" class="message-icon"/>
+	            </div>
+	            <div class="alert-content">
+	                <p class="alert-title">Message Sent!</p>
+	                <p class="alert-body">
+	                    Your message was successfully sent. You can also contact me on these accounts:<br><br>
+	                    Gmail: medinajuanantonio95@gmail.com<br>
+	                    Mobile: +63 9210432052
+	                </p>
+	            </div>
+	            <div class="alert-exit">
+	                <span>&#10006;</span>
+	            </div>
+	        </div>
+	    </div>
+	    <nav class="ezss-nav nav-clear nav">
+	        <div class="nav-center">
+	            <a href="#home" class="nav-tab">HOME</a>
+	<a href="#about-me" class="nav-tab">ABOUT ME</a>
+	<a href="#skills" class="nav-tab">SKILLS</a>
+	<a href="#projects" class="nav-tab">MY PROJECTS</a>
+	<a href="#contact" class="nav-tab">CONTACT ME</a>
+	        </div>
+	    </nav>
+	    <nav class="ezss-nav nav-clear nav-right sidebar">
+	        <a href="#home" onclick="openNav()" class="nav-tab">&#9776;</a>
+	    </nav>
+	    <div id="mySidenav" class="sidenav">
+	        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	        <a href="#home" class="nav-tab">HOME</a>
+	<a href="#about-me" class="nav-tab">ABOUT ME</a>
+	<a href="#skills" class="nav-tab">SKILLS</a>
+	<a href="#projects" class="nav-tab">MY PROJECTS</a>
+	<a href="#contact" class="nav-tab">CONTACT ME</a>
+	    </div>
+	    <div id="mainContainer">
+	        <div class="home" id="home">
+	            <img src="../assets/home-image.jpg" />
+	            <p class="home-name">JANJAN MEDINA</p>
+	            <p class="home-description">DREAMER. INNOVATOR. DEVELOPER.</p>
+	                
+	            <button class="ezss-btn btn-clear">CHECK MY PROJECTS</button>
+	        </div>
+	        <div class="about-me content" id="about-me">
+	            <h2>ABOUT ME</h2>
+	            <p>
+	                Hi, I'm Janjan Medina. I am an IT Student studying in University of Santo Tomas, Manila,Philippines. I create Mobile Applications, Web Apps, and all kinds of stuff as a hobby. I have experience in creating Webpages using HTML, CSS, Javascript and Javascript Frameworkslike React JS. I also make Mobile Applications for personal and professional use. For Mobile Development, I have knowledge with Basic Android Java and Advance React Native Framework.I also love creating scripts and applications that can help solving simple to complex problems.I'm very passionate about everything I do and I love making dreams into reality.
+	            </p>
+	            <div class="skills-con" id="skills">
+	                <div class="skills-head">
+	                    <div class="nav-left">
+	                        <h3>SKILLS</h3>
+	                    </div>
+	                    <div class="nav-right">
+	                        <button class="ezss-btn btn-danger" onclick="webSkill()" id="skills-web-btn">Web</button>
+	                        <button class="ezss-btn btn-danger" onclick="mobileSkill()" id="skills-mobile-btn">Mobile</button>
+	                    </div>
+	                </div>
+	                <div class="skills-web" id="skills-web-con">
+	                    <div class="skill-set">
+	                        <div class="skill-bar html5">
+	                            <div class="nav-left text-clear">HTML5</div>
+	                            <div class="nav-right">95&#37;</div>
+	                        </div>
+	                        <div class="skill-bar css3">
+	                            <div class="nav-left text-clear">CSS3</div>
+	                            <div class="nav-right">75&#37;</div>
+	                        </div>
+	                        <div class="skill-bar javascript">
+	                            <div class="nav-left text-clear">Javascript</div>
+	                            <div class="nav-right">60&#37;</div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="skills-mobile" id="skills-mobile-con">
+	                    <div class="skill-set">
+	                        <div class="skill-bar android-java">
+	                            <div class="nav-left text-clear">Android Java</div>
+	                            <div class="nav-right">60&#37;</div>
+	                        </div>
+	                        <div class="skill-bar react-native">
+	                            <div class="nav-left text-clear">React Native</div>
+	                            <div class="nav-right">75&#37;</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div>
+	                <button class="ezss-btn btn-info fb" onclick="location.href='https://www.facebook.com/janjanmedinaaa'">
+	                    <i class="fa fa-facebook-square"></i> 
+	                    &nbsp; ADD ME ON FACEBOOK
+	                </button>	
+	                <button class="ezss-btn btn-info" onclick="location.href='https://twitter.com/janjanmedinaaa'">
+	                    <i class="fa fa-twitter"></i> 
+	                    &nbsp; FOLLOW ME ON TWITTER
+	                </button>
+	            </div>
+	        </div>
+	        <div class="my-projects content" id="projects">
+	            <h2>MY PROJECTS</h2>
+	            <div class="project-con">
+	                <div class="project-image">
+	                    <img src="../assets/mygwa-icon.png" class="mygwa-icon">
+	                    <p>
+	                        <span class="mygwa-my">My</span>
+	                        <span class="mygwa-gwa">GWA</span>
+	                    </p>
+	                </div>
+	                <div class="project-description">
+	                    <p>MyGWA Chrome Extension</p>
+	                    <p>MyGWA is a Chrome Extension used for calculating Semestral Grade based on Subject grades and units. MyGWA is indirectly integrated with MyUSTe for easy Grade calculations.</p>
+	                    <button class="ezss-btn" onclick="location.href='https://github.com/janjanmedinaaa/mygwa'">
+	                        <i class="fa fa-github"></i> 
+	                        &nbsp;&nbsp; <span class="mygwa-btn-text"></span>
+	                    </button>
+	                </div>
+	            </div>
+	            <div class="project-con">
+	                <div class="project-description">
+	                    <p>Gradulate Application</p>
+	                    <p>Gradulate is a mobile application used to calculate your Semestral grade based on Grade Components and their respective percentage.</p>
+	                    <button class="ezss-btn" onclick="location.href='https://github.com/janjanmedinaaa/Gradulate'">
+	                        <i class="fa fa-github"></i> 
+	                        &nbsp;&nbsp; <span class="gradulate-btn-text"></span>
+	                    </button>
+	                </div>
+	                <div class="project-image">
+	                    <img src="../assets/gradulate-icon.png" class="gradulate-icon">
+	                    <p class="gradulate-text">
+	                        GRADULATE
+	                    </p>
+	                </div>
+	            </div>
+	            <div>
+	                <button class="ezss-btn" onclick="location.href='https://github.com/janjanmedinaaa'">
+	                    <i class="fa fa-github"></i> 
+	                    &nbsp; FOLLOW ME ON GITHUB
+	                </button>	
+	            </div>
+	        </div>
+	        <div class="contact-me content" id="contact">
+	            <h2>CONTACT ME</h2>
+	        
+	            <div class="contact-con" method="POST">
+	                <div class="contact-item-con">
+	                    <input type="text" class="ezss-input" id="fname" placeholder="First Name" required/> 
+	                    <input type="text" class="ezss-input" id="lname" placeholder="Last Name" required/> 
+	                </div>
+	                <div class="contact-item-con">
+	                    <input type="text" class="ezss-input" id="email" placeholder="Email" required/> 
+	                </div>
+	                <div class="contact-item-con">
+	                    <input type="text" class="ezss-input" id="subject" placeholder="Subject" required/> 
+	                </div>
+	                <div class="contact-item-con">
+	                    <textarea id="message" placeholder="Message..." required ></textarea>
+	                </div>
+	                <button class="ezss-btn btn-danger" onClick="sendEmail()">SEND MESSAGE</button>
+	            </div>
+	        </div> 
+	        <div class="footer nav-sm">
+	            <p>	&copy; Janjan Medina 2018 </p>
+	            <div class="nav-right">
+	                <a href="#home" class="nav-tab">HOME</a>
+	<a href="#about-me" class="nav-tab">ABOUT ME</a>
+	<a href="#skills" class="nav-tab">SKILLS</a>
+	<a href="#projects" class="nav-tab">MY PROJECTS</a>
+	<a href="#contact" class="nav-tab">CONTACT ME</a>
+	            </div>
+	        </div>
+	    </div>
+	</body>
+</html>

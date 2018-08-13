@@ -1,0 +1,88 @@
+/* Open Sans by Google */
+
+@font-face {
+    font-family: Open Sans;
+    src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: Open Sans Light;
+    src: url(../fonts/Open_Sans/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: Open Sans SemiBold;
+    src: url(../fonts/Open_Sans/OpenSans-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: Open Sans Bold;
+    src: url(../fonts/Open_Sans/OpenSans-Bold.ttf);
+}
+
+
+/* Montserrat by Google */
+
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: Montserrat Light;
+    src: url(../fonts/Montserrat/Montserrat-Light.ttf);
+}
+
+@font-face {
+    font-family: Montserrat Medium;
+    src: url(../fonts/Montserrat/Montserrat-Medium.ttf);
+}
+
+@font-face {
+    font-family: Montserrat Bold;
+    src: url(../fonts/Montserrat/Montserrat-Bold.ttf);
+}
+
+/* Oswald by Google */
+
+@font-face {
+    font-family: Oswald;
+    src: url(../fonts/Oswald/Oswald-Regular.ttf);
+}
+
+@font-face {
+    font-family: Oswald Light;
+    src: url(../fonts/Oswald/Oswald-Light.ttf);
+}
+
+@font-face {
+    font-family: Oswald Medium;
+    src: url(../fonts/Oswald/Oswald-Medium.ttf);
+}
+
+@font-face {
+    font-family: Oswald Bold;
+    src: url(../fonts/Oswald/Oswald-Bold.ttf);
+}
+
+/* Roboto by Google */
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto Light;
+    src: url(../fonts/Roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+    font-family: Roboto Medium;
+    src: url(../fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: Roboto Bold;
+    src: url(../fonts/Roboto/Roboto-Bold.ttf);
+}

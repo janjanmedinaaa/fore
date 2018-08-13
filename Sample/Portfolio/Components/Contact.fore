@@ -1,0 +1,20 @@
+<div class="contact-me content" id="contact">
+    <h2>CONTACT ME</h2>
+
+    <div class="contact-con" method="POST">
+        <div class="contact-item-con">
+            <input type="text" class="ezss-input" id="fname" placeholder="First Name" required/> 
+            <input type="text" class="ezss-input" id="lname" placeholder="Last Name" required/> 
+        </div>
+        <div class="contact-item-con">
+            <input type="text" class="ezss-input" id="email" placeholder="Email" required/> 
+        </div>
+        <div class="contact-item-con">
+            <input type="text" class="ezss-input" id="subject" placeholder="Subject" required/> 
+        </div>
+        <div class="contact-item-con">
+            <textarea id="message" placeholder="Message..." required ></textarea>
+        </div>
+        <button class="ezss-btn btn-danger" onClick="sendEmail()">SEND MESSAGE</button>
+    </div>
+</div> 

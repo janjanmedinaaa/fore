@@ -1,0 +1,12 @@
+<nav class="ezss-nav nav-clear nav">
+    <div class="nav-center">
+        @nav-tabs
+    </div>
+</nav>
+<nav class="ezss-nav nav-clear nav-right sidebar">
+    <a href="#home" onclick="openNav()" class="nav-tab">&#9776;</a>
+</nav>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    @nav-tabs
+</div>

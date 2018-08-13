@@ -1,0 +1,698 @@
+/*
+	!!!DON'T FORGET TO UPDATE THESE INFORMATION!!!
+	Filename: index.html
+	Author: Janjan Medina
+	Author URI: https://github.com/janjanmedinaaa
+	Project: Portfolio
+*/
+
+/***** General Styles *****/
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+	font-family: Roboto;
+	color: #fff;
+}
+
+/* Background Images */
+
+.home, .my-projects, .footer {
+	background-image:url(../assets/home-bg.png);
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center; 
+}
+
+/***** mainContainer *****/
+
+#mainContainer {
+	display: flex;
+	flex-direction: column;
+	background-color: #DB3243;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+
+#message-success, #message-fail {
+	display: none;
+}
+
+.message-container {
+	margin: 0;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: column;	
+	position: fixed;
+	width: 100%;
+	bottom: 20;
+	right: 20;
+}
+
+.message-icon {
+	width: 50px;
+	height: 50px;
+}
+
+.alert-icon {
+	display: none;
+}
+
+.nav {
+	margin: 0;
+	display: none;
+}
+
+.nav a, .sidebar a {
+	color: #fff;
+}
+
+.nav a:hover, .sidebar a:hover {
+	color: #DEDCDC;
+}
+
+.sidebar {
+	margin: 0;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.sidebar a {
+	font-size: 30px;
+}
+
+.sidenav {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FEFDFD;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+	text-align:center;
+	margin: 0;
+	padding: 0;
+}
+
+.sidenav a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #DB3243;
+    display: block;
+	transition: 0.3s;
+	border-style: none;
+}
+
+.sidenav a:hover{
+    color: #DEDCDC;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+	top: 0;
+    right: 20px;
+    font-size: 36px;
+}
+
+.home {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.home img {
+	border-radius: 200px;
+	width: 200px;
+	height: 200px;
+	margin: 20px;
+}
+
+.home p, .home button {
+	margin: 10px;
+	font-family: Roboto Light;
+	text-align: center;
+}
+
+.home-name {
+	font-size: 35px;
+	font-weight: 400;
+}
+
+.home-description {
+	font-size: 13px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+}
+
+.about-me {
+	background-color: #FEFDFD;
+	padding: 30px 20px;
+}
+
+.about-me h2 {
+	color: #DB3243;
+}
+
+.about-me p {
+	padding: 15px 20%;
+	letter-spacing: 1px;
+	color: #000;
+}
+
+.skills-con {
+	display: flex;
+	flex-direction: column;
+	/* background-color: teal; */
+	width: 70%;
+	color: #DB3243;
+}
+
+.skills-con > div {
+	padding: 0;
+	margin: 0;
+}
+
+.skills-head {
+	display: flex;
+}
+
+.skills-head .nav-left {
+	justify-content: center;
+}
+
+.skills-head .nav-right {
+	display: none;
+}
+
+.skills-con h3{
+	padding: 0 10px;
+	text-decoration-line: none;
+	text-decoration-color: transparent;
+	align-self: center;
+}
+
+.skill-select {
+	background-color:#ED5565;
+	color: #fff;
+}
+
+.skill-set {
+	width: 85%;
+	padding: 0;
+	margin: 0;
+}
+
+.skill-bar {
+	display: flex;
+	padding: 0;
+	border: 1px solid #DB3243;
+	margin-bottom: 0;
+}
+
+.skills-web, .skills-mobile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Skills */
+
+.html5 {
+    background: -webkit-linear-gradient(left, #ED5565 95%, #FEFDFD 5%);
+    background: -o-linear-gradient(left, #ED5565 95%, #FEFDFD 5%);
+    background: -moz-linear-gradient(left, #ED5565 95%, #FEFDFD 5%);
+	background: linear-gradient(left, #ED5565 95%, #FEFDFD 5%);
+}
+
+.css3 {
+    background: -webkit-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+    background: -o-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+    background: -moz-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+	background: linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+}
+
+.javascript {
+    background: -webkit-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+    background: -o-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+    background: -moz-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+	background: linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+}
+
+.android-java {
+    background: -webkit-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+    background: -o-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+    background: -moz-linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+	background: linear-gradient(left, #ED5565 60%, #FEFDFD 40%);
+}
+
+.react-native {
+    background: -webkit-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+    background: -o-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+    background: -moz-linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+	background: linear-gradient(left, #ED5565 75%, #FEFDFD 25%);
+}
+
+.fb {
+    border-color:#3B5998;
+    color: #3B5998;
+}
+
+.fb:before {
+    background: #3B5998;
+}
+
+.my-projects {
+	padding: 30px 0;
+}
+
+.project-con {
+	display: flex;
+	padding: 0;
+	margin: 20px 0;
+	width: 100%;
+	flex-direction: column;
+}
+
+.project-con > div {
+	flex: 1;
+	margin: 0;
+}
+
+.project-image {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.project-description {
+	display: flex;
+	color: #000;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 10px 50px;
+}
+
+.project-description p {
+	margin: 10px 40px;
+	padding: 0;
+	text-align: center;
+}
+
+.project-description p:nth-child(1) {
+	width: 100%;
+	font-size: 30px;
+	margin: 0;
+}
+
+.project-description p:nth-child(2) {
+	padding: 0;
+	margin: 20px 0;
+}
+
+.project-description > button {
+	display: flex;
+	align-items: center;
+}
+
+.project-description > button:before {
+	background: transparent;
+}
+
+/* MyGWA Assets */
+
+.mygwa-icon {
+	width: 100px;
+	height: 100px;
+}
+
+.mygwa-my {
+	font-family: Roboto Light;
+	color: #000;
+	font-size: 50px;
+}
+
+.mygwa-gwa {
+	font-family: Roboto Bold;
+	margin-left: -5px;
+	color: rgb(254, 198, 1);
+	font-size: 50px;
+}
+
+.mygwa-btn-text:after {
+	content: '/janjanmedinaaa/mygwa';
+}
+
+/* End of MyGWA Assets */
+
+/* Gradulate Assets */
+
+.gradulate-icon {
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+}
+
+.gradulate-text {
+	font-size: 35px;
+	margin-top: 10px;
+	font-family: Roboto Thin;
+	color: rgb(126, 236, 197);
+}
+
+.gradulate-btn-text:after {
+	content: '/janjanmedinaaa/Gradulate';
+}
+
+/* End of Gradulate Assets */
+
+.contact-me {
+	padding: 30px 0;
+	background-color: #FEFDFD;
+	color: #DB3243;
+}
+
+.contact-con {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 5px;
+	padding: 15px 5px;
+	width: 70%;
+}
+
+.contact-item-con {
+	display: flex;
+	flex: 1;
+	width: 100%;
+	align-self: center; 
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.contact-item-con input, .contact-item-con textarea {
+	flex: 1;
+	margin: 5px;
+	margin-top: 0;
+	border-color: #DB3243;
+}
+
+.contact-item-con textarea {
+	height: 250px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 12px 0;
+	background-color: #DB3243;
+	margin: 0;
+}
+
+.footer a {
+	border-width: 0;
+	color: #fff;
+}
+
+.footer a:hover {
+	color: #DEDCDC;
+}
+
+.footer .nav-right {
+	flex-direction: column;
+}
+
+.footer .nav-right a {
+	padding: 10px;
+}
+
+@media (min-width: 600px) {
+	.home img {
+		border-radius: 300px;
+		width: 300px;
+		height: 300px;
+	}
+
+	.home-name {
+		font-size: 40px;
+		font-weight: 400;
+	}
+	
+	.home-description {
+		font-size: 15px;
+	}
+
+	.about-me {
+		padding: 30px 50px;
+	}
+
+	.skills-head .nav-left {
+		justify-content: flex-start;
+	}
+	
+	.skills-head .nav-right {
+		display: inline-flex;
+	}
+
+	.skills-mobile {
+		display: none;
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+	.message-container {
+		width: 430px;
+	}
+
+	.alert-icon {
+		display: inline-flex;
+	}
+
+	.nav {
+		display: block;
+	}
+
+	.sidebar {
+		display: none;
+	}
+
+	.home img {
+		border-radius: 350px;
+		width: 350px;
+		height: 350px;
+	}
+
+	.home-name {
+		font-size: 50px;
+		font-weight: 400;
+	}
+	
+	.home-description {
+		font-size: 17px;
+	}
+	
+	.project-description p:nth-child(2) {
+		margin: 20px 80px;
+	}
+
+	.project-description > button {
+		display: inline-flex;
+		margin: 0;
+		align-self: center;
+	}
+
+	/* MyGWA Assets */
+	
+	.mygwa-icon {
+		width: 130px;
+		height: 130px;
+	}
+	
+	.mygwa-my, .mygwa-gwa {
+		font-size: 70px;
+	}
+	
+	.mygwa-btn-text:after {
+		content: 'https://github.com/janjanmedinaaa/mygwa';
+	}
+	/* End of MyGWA Assets */
+	
+	/* Gradulate Assets */
+	
+	.gradulate-icon {
+		width: 80px;
+		height: 80px;
+		border-radius: 12px;
+		margin-right: 12px;
+	}
+	
+	.gradulate-text {
+		font-size: 50px;
+	}
+
+	.gradulate-btn-text:after {
+		content: 'https://github.com/janjanmedinaaa/Gradulate';
+	}
+	/* End of Gradulate Assets */
+	
+	.contact-con {
+		align-items: flex-end;
+		width: 50%;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+	.footer {
+		display: flex;
+		justify-content: space-around;
+		flex-direction: row;
+		padding: 12px 50px;
+	}
+	
+	.footer .nav-right {
+		flex-direction: row;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+	.project-image {
+		flex-direction: row;
+	}
+
+	.project-image, .project-description {
+		padding: 10px 50px;
+	}
+
+	.project-con {
+		flex-direction: row;
+	}
+	
+	.project-description p, .project-description > div  {
+		margin: 20px 30px;
+		margin-bottom: 0;
+		text-align: left;
+	}
+	
+	.project-description p:nth-child(1) {
+		font-size: 40px;
+	}
+	
+	.project-description p:nth-child(2) {
+		margin: 20px 0;
+		margin-right: 100px;
+	}
+
+	.project-description > button {
+		display: inline-flex;
+		align-self: flex-start;
+		margin: 0;
+	}
+	
+	/* MyGWA Assets */
+	
+	.mygwa-icon {
+		width: 150px;
+		height: 150px;
+	}
+	
+	.mygwa-my {
+		font-size: 100px;
+	}
+	
+	.mygwa-gwa {
+		font-size: 100px;
+	}
+	
+	/* End of MyGWA Assets */
+	
+	/* Gradulate Assets */
+	
+	.gradulate-icon {
+		width: 100px;
+		height: 100px;
+		border-radius: 20px;
+		margin-right: 20px;
+	}
+	
+	.gradulate-text {
+		font-size: 70px;
+	}
+	
+	/* End of Gradulate Assets */
+}
+
+@media (min-height: 550px) {
+	.sidenav a {
+		padding: 30px;
+	}
+}
+
+@media (min-height: 1082px), (min-width: 1500px) {
+	.home, .my-projects, .footer {
+		background-image:url(./assets/home-bg-v2.png);
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		background-position:center; 
+	}
+}
+
+@media (max-height: 650px) {
+	.home {
+		min-height: 682px;
+	}
+}
+
+@media (max-width: 420px) {
+	.contact-me, .about-me {
+		min-height: 100vh;
+	}
+}
+
+@media (max-width: 1200px) {
+	.project-image {
+		order: 1;
+	}
+
+	.project-description {
+		order: 2;
+	}
+}

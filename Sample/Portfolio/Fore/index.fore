@@ -1,0 +1,28 @@
+<title text="@title" />
+
+<imports>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
+    <link rel="stylesheet" href="../ezss/css/ezss.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <script src="../ezss/js/ezss.js"></script>
+    <script src="../js/index.js"></script>
+</imports>
+
+<content>
+    <Message />
+    <Navbar />
+    <div id="mainContainer">
+        <div class="home" id="home">
+            <img src="../assets/home-image.jpg" />
+            <p class="home-name">@name</p>
+            <p class="home-description">@description</p>
+                
+            <button class="ezss-btn btn-clear">CHECK MY PROJECTS</button>
+        </div>
+        <About />
+        <Projects />
+        <Contact />
+        <Footer />
+    </div>
+</content>

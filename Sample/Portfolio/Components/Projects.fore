@@ -1,0 +1,42 @@
+<div class="my-projects content" id="projects">
+    <h2>MY PROJECTS</h2>
+    <div class="project-con">
+        <div class="project-image">
+            <img src="../assets/mygwa-icon.png" class="mygwa-icon">
+            <p>
+                <span class="mygwa-my">My</span>
+                <span class="mygwa-gwa">GWA</span>
+            </p>
+        </div>
+        <div class="project-description">
+            <p>@proj-name-one</p>
+            <p>@proj-des-one</p>
+            <button class="ezss-btn" onclick="location.href='@proj-url-one'">
+                <i class="fa fa-github"></i> 
+                &nbsp;&nbsp; <span class="mygwa-btn-text"></span>
+            </button>
+        </div>
+    </div>
+    <div class="project-con">
+        <div class="project-description">
+            <p>@proj-name-two</p>
+            <p>@proj-des-two</p>
+            <button class="ezss-btn" onclick="location.href='@proj-url-two'">
+                <i class="fa fa-github"></i> 
+                &nbsp;&nbsp; <span class="gradulate-btn-text"></span>
+            </button>
+        </div>
+        <div class="project-image">
+            <img src="../assets/gradulate-icon.png" class="gradulate-icon">
+            <p class="gradulate-text">
+                GRADULATE
+            </p>
+        </div>
+    </div>
+    <div>
+        <button class="ezss-btn" onclick="location.href='@github'">
+            <i class="fa fa-github"></i> 
+            &nbsp; FOLLOW ME ON GITHUB
+        </button>	
+    </div>
+</div>

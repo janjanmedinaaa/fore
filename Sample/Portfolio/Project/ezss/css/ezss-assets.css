@@ -1,0 +1,363 @@
+/* 
+* This is the EzSS Assets Page. In this file, 
+* you can see the custom buttons, inputs,
+* and notifications css. 
+* Author: Janjan Medina 
+*/
+
+/* Bug: Default button hover nagiging white yung border */
+/* Main EzSS Button */
+
+.ezss-btn {
+    background: transparent;
+    border-style: none;
+    border: 1px solid #000;
+    font-family: Open Sans;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid;
+    transition:         0.08s ease-in;
+    -o-transition:      0.08s ease-in;
+    -ms-transition:     0.08s ease-in;
+    -moz-transition:    0.08s ease-in;
+    -webkit-transition: 0.08s ease-in;
+}
+
+/* Button Sizes */
+
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+.btn-lg {
+    font-size: 15px;
+    padding: 15px 25px;
+    font-family: Open Sans SemiBold;
+}
+
+/* Button Colors (Default: Black) */
+
+.btn-clear {
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-success {
+    border-color:#8CC152;
+    color: #8CC152;
+}
+
+.btn-danger {
+    border-color:#DA4453;
+    color: #DA4453;
+}
+
+.btn-warning {
+    border-color:#FFBB42;
+    color: #FFBB42;
+}
+
+.btn-info {
+    border-color:#3BAFDA;
+    color: #3BAFDA;
+}
+
+/* Disabled Button */
+
+.disabled {
+    opacity: .5;
+}
+
+/****** Button Hovers ******/
+
+/* Default Button Hover */
+
+.ezss-btn:hover {
+    color: #FEFDFD;
+}
+  
+.ezss-btn:before {
+    content: "";
+    position: absolute;
+    background: #434A54;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    -webkit-transition: top 0.09s ease-in;
+}
+  
+.ezss-btn:hover:before {
+    top: 0;
+}
+
+/* Success Button Hover */
+
+.btn-success:before {
+    background: #A0D468;
+}
+
+/* Danger Button Hover */
+
+.btn-danger:before {
+    background: #ED5565;
+}
+
+/* Warning Button Hover */
+
+.btn-warning:before {
+    background: #FFCE54;
+}
+
+/* Info Button Hover */
+
+.btn-info:before {
+    background: #4FC1E9;
+}
+
+/* Clear Button Hover */
+
+.btn-clear:hover {
+    color: #434A54;
+}
+
+.btn-clear:before {
+    background: #F7F7F7;
+}
+
+/* Bug: Dapat walang nangyayare pag naghover ng disabled */
+/* Disabled Button Hover */
+
+.disabled:hover {
+    color: initial;
+    opacity: .5;
+}
+  
+.disabled:before {
+    position: relative;
+    background: initial;
+    opacity: .5;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+/****** Button Active ******/
+
+/* Default Button Active */
+
+.ezss-btn:focus {
+    background-color: #434A54;
+    color: #FEFDFD;
+    outline: none;
+}
+
+/* Success Button Active */
+
+.btn-success:focus {
+    background-color: #A0D468;
+}
+
+/* Danger Button Active */
+
+.btn-danger:focus {
+    background-color: #ED5565;
+}
+
+/* Warning Button Active */
+
+.btn-warning:focus {
+    background-color: #FFCE54;
+}
+
+/* Info Button Active */
+
+.btn-info:focus {
+    background-color: #4FC1E9;
+}
+
+/* Clear Button Active */
+
+.btn-clear:focus {
+    background-color: #F7F7F7;
+    color: #434A54;
+}
+
+/* EzSS Main Alert */
+
+.ezss-alert {
+    display: flex;
+    font-family: Open Sans;
+    color: #FEFDFD;
+    border: 1px solid #FEFDFD;
+    background: #434A54;
+    opacity: 1;
+    transition: opacity 0.6s;
+}
+
+.alert-exit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: -20px;
+    background: #434A54;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #FEFDFD;
+    border-radius: 20px;
+
+}
+
+.alert-exit > span {
+    font-family: Open Sans;
+    color: #FEFDFD;
+    align-self: center;
+    background: transparent;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.alert-exit > span:hover {
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.alert-icon {
+    display: flex;
+}
+
+.alert-icon img, 
+.alert-icon span, 
+.alert-icon p {
+    padding: 15px;
+}
+
+.alert-content {
+    flex: 1;
+    padding: 15px;
+    padding-right: 20px;
+}
+
+.alert-title {
+    font-family: Open Sans Bold;
+    margin: 0;
+    padding: 0;
+}
+
+.alert-body {
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+/****** Alert Colors ******/
+
+/* Success Alert */
+
+.alert-success, .alert-success > .alert-exit {
+    background-color: #A0D468;
+}
+
+/* Danger Alert */
+
+.alert-danger, .alert-danger > .alert-exit {
+    background-color: #ED5565;
+}
+
+/* Warning Alert */
+
+.alert-warning, .alert-warning > .alert-exit {
+    background-color: #FFCE54;
+}
+
+/* Info Alert */
+
+.alert-info, .alert-info > .alert-exit {
+    background-color: #4FC1E9;
+}
+
+/* EzSS Inputs */
+
+.ezss-input, textarea {
+    font-family: Open Sans;
+    padding: 7px 10px;
+    background-color: transparent;
+    border-style: none;
+    border: 1px solid #434A54;
+    width: 200px;
+    outline: none;
+}
+
+textarea {
+    padding: 10px;
+    border: 1px solid #434A54;
+}
+
+.input-under {
+    border-bottom: 1px solid #434A54;
+}
+
+/****** Input Colors ******/
+
+.input-success {
+    border: 1px solid #8CC152;
+}
+
+.input-danger {
+    border: 1px solid #DA4453;
+}
+
+.input-under-success {
+    border-bottom: 1px solid #8CC152;
+}
+
+.input-under-danger {
+    border-bottom: 1px solid #DA4453;
+}
+
+
+/****** EzSS Input Group ******/
+
+.input-group {
+    position: relative;
+    width: 250px;
+    line-height: 44px;
+    margin: 15px;
+}
+
+.input-group > .ezss-input {
+    width: 100%;
+    border-style: none;
+    border-bottom: 1px solid #434A54;
+}
+
+.input-label {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    color: #434A54;
+    transition: 0.2s all;
+    font-size: 15px;
+    font-family: Open Sans Light;
+}
+
+.input-group > .ezss-input:focus~label,
+.input-group > .ezss-input:valid~label {
+    top: -24px;
+    font-size: 13px;
+}
+
+/****** Input Focus ******/
+
+.ezss-input:focus {
+    border-width: 1px;
+    transition: 0.5s all;
+}

@@ -1,0 +1,32 @@
+<div class="message-container">
+    <div class="ezss-alert alert-danger" id="message-fail">
+        <div class="alert-icon">
+            <img src="../assets/message-icon.png" class="message-icon"/>
+        </div>
+        <div class="alert-content">
+            <p class="alert-title">Message not sent!</p>
+            <p class="alert-body">
+                Make sure to validate all information first. All inputs are required!
+           </p>
+        </div>
+        <div class="alert-exit">
+            <span>&#10006;</span>
+        </div>
+    </div>
+    <div class="ezss-alert alert-success" id="message-success">
+        <div class="alert-icon">
+            <img src="../assets/message-icon.png" class="message-icon"/>
+        </div>
+        <div class="alert-content">
+            <p class="alert-title">Message Sent!</p>
+            <p class="alert-body">
+                Your message was successfully sent. You can also contact me on these accounts:<br><br>
+                Gmail: @email<br>
+                Mobile: @contact
+            </p>
+        </div>
+        <div class="alert-exit">
+            <span>&#10006;</span>
+        </div>
+    </div>
+</div>

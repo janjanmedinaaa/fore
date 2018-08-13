@@ -1,0 +1,6 @@
+<div class="footer nav-sm">
+    <p>	&copy; Janjan Medina 2018 </p>
+    <div class="nav-right">
+        @nav-tabs
+    </div>
+</div>

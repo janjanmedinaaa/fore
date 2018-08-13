@@ -1,0 +1,84 @@
+/* 
+* This is the EzSS Basics Page. In this file, 
+* you can see the custom headings, divs, p
+* body, etc. Basically this fixes the reset.
+* Author: Janjan Medina 
+*/
+
+body {
+    padding: 15px;
+    font-family: Open Sans SemiBold;
+}
+
+p {
+    font-family: Open Sans;
+}
+
+div, button, h1, h2, h3, h4, h5, h6 {
+    margin: 5px;
+    padding: 5px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;   
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 16px;   
+}
+
+.text-success {
+    color: #8CC152;
+}
+
+.text-danger {
+    color: #DA4453;
+}
+
+.text-warning {
+    color: #FFBB42;
+}
+
+.text-info {
+    color: #3BAFDA;
+}
+
+.text-clear {
+    color: #fff;
+}
+
+.bg-success {
+    background-color: #8CC152;
+}
+
+.bg-danger {
+    background-color: #DA4453;
+}
+
+.bg-warning {
+    background-color: #FFBB42;
+}
+
+.bg-info {
+    background-color: #3BAFDA;
+}
+
+.bg-clear {
+    background-color: #fff;
+}

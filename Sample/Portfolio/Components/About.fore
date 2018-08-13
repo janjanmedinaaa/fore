@@ -1,0 +1,55 @@
+<div class="about-me content" id="about-me">
+    <h2>ABOUT ME</h2>
+    <p>
+        @about-me
+    </p>
+    <div class="skills-con" id="skills">
+        <div class="skills-head">
+            <div class="nav-left">
+                <h3>SKILLS</h3>
+            </div>
+            <div class="nav-right">
+                <button class="ezss-btn btn-danger" onclick="webSkill()" id="skills-web-btn">Web</button>
+                <button class="ezss-btn btn-danger" onclick="mobileSkill()" id="skills-mobile-btn">Mobile</button>
+            </div>
+        </div>
+        <div class="skills-web" id="skills-web-con">
+            <div class="skill-set">
+                <div class="skill-bar html5">
+                    <div class="nav-left text-clear">HTML5</div>
+                    <div class="nav-right">95%</div>
+                </div>
+                <div class="skill-bar css3">
+                    <div class="nav-left text-clear">CSS3</div>
+                    <div class="nav-right">75%</div>
+                </div>
+                <div class="skill-bar javascript">
+                    <div class="nav-left text-clear">Javascript</div>
+                    <div class="nav-right">60%</div>
+                </div>
+            </div>
+        </div>
+        <div class="skills-mobile" id="skills-mobile-con">
+            <div class="skill-set">
+                <div class="skill-bar android-java">
+                    <div class="nav-left text-clear">Android Java</div>
+                    <div class="nav-right">60%</div>
+                </div>
+                <div class="skill-bar react-native">
+                    <div class="nav-left text-clear">React Native</div>
+                    <div class="nav-right">75%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="ezss-btn btn-info fb" onclick="location.href='@facebook'">
+            <i class="fa fa-facebook-square"></i> 
+            &nbsp; ADD ME ON FACEBOOK
+        </button>	
+        <button class="ezss-btn btn-info" onclick="location.href='@twitter'">
+            <i class="fa fa-twitter"></i> 
+            &nbsp; FOLLOW ME ON TWITTER
+        </button>
+    </div>
+</div>

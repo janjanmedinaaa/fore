@@ -1,0 +1,209 @@
+/* 
+* This is the EzSS Navigation Page. In this file, 
+* you can see the whole css configuration
+* of the Navigation Bar. 
+* Author: Janjan Medina 
+*/
+
+.ezss-nav {
+    margin: -15px;
+    padding: 0 70px;
+    margin-bottom: 15px;
+    display:flex;
+    font-family: Open Sans SemiBold;
+    flex-wrap: wrap;
+    color: #434A54;
+    background-color: #F7F7F7
+}
+
+/****** Navigation Colors ******/
+
+.nav-clear, .nav-clear .nav-tab,
+.nav-clear .nav-drop .drop-content,
+.nav-clear .nav-drop {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.nav-success, .nav-success .nav-tab,
+.nav-success .nav-drop .drop-content,
+.nav-success .nav-drop {
+    background-color: #8CC152;
+    border: 1px solid #8CC152;
+}
+
+.nav-danger, .nav-danger .nav-tab,
+.nav-danger .nav-drop .drop-content,
+.nav-danger .nav-drop {
+    background-color: #DA4453;
+    border: 1px solid #DA4453;
+}
+
+.nav-warning, .nav-warning .nav-tab,
+.nav-warning .nav-drop .drop-content,
+.nav-warning .nav-drop {
+    background-color: #FFBB42;
+    border: 1px solid #FFBB42;
+}
+
+.nav-info, .nav-info .nav-tab,
+.nav-info .nav-drop .drop-content,
+.nav-info .nav-drop {
+    background-color: #3BAFDA;
+    border: 1px solid #3BAFDA;
+}
+
+.nav-negative, .nav-negative .nav-tab,
+.nav-negative .nav-drop .drop-content,
+.nav-negative .nav-drop {
+    background-color: #434A54;
+    border: 1px solid #434A54;
+}
+
+/****** Navigation Selected ******/
+
+.ezss-nav .live {
+    border: 1px solid #434A54;
+}
+
+.nav-danger .live, .nav-success .live,
+.nav-warning .live, .nav-info .live,
+.nav-negative .live {
+    border: 1px solid #F7F7F7;
+}
+
+.nav-info .nav-tab:hover,
+.nav-danger .nav-tab:hover, 
+.nav-success .nav-tab:hover,
+.nav-warning .nav-tab:hover, 
+.nav-negative .nav-tab:hover,
+.nav-info .nav-drop:hover,
+.nav-danger .nav-drop:hover, 
+.nav-success .nav-drop:hover,
+.nav-warning .nav-drop:hover, 
+.nav-negative .nav-drop:hover
+.nav-info .drop-item:hover,
+.nav-danger .drop-item:hover, 
+.nav-success .drop-item:hover,
+.nav-warning .drop-item:hover, 
+.nav-negative .drop-item:hover,
+.nav-info .drop-item:hover,
+.nav-danger .drop-item:hover, 
+.nav-success .drop-item:hover,
+.nav-warning .drop-item:hover, 
+.nav-negative .drop-item:hover {
+    color: #EEEEEE;
+}
+
+/****** Sticky Navigation ******/
+
+.nav-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/****** Navigation Sizes ******/
+
+.nav-sm {
+    padding: 0 70px;
+}
+
+.nav-sm .nav-tab, .nav-sm .nav-logo  {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.nav-lg {
+    padding: 13px 70px;
+}
+
+.nav-lg .nav-tab  {
+    padding: 15px;
+    margin: 5px;
+}
+
+/****** Navigation Positions ******/
+
+.nav-left {
+    display: flex;
+    flex: 1;
+}
+
+.nav-right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-center {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+/****** Navigation Component ******/
+
+/* Navigation Icon */
+
+.nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+/* Navigation Tab / Navigation Drop */
+
+.nav-tab, .nav-drop {
+    color: #434A54;
+    font-size: 14px;
+    padding: 15px;
+    margin: 5px;
+    text-decoration-line: none;
+    border: 1px solid #F7F7F7;
+}
+
+.nav-tab:hover, .nav-drop:hover {
+    color: #6E737B;
+}
+
+/****** Navigation Drop Components ******/
+
+.nav-drop {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-drop .nav-tab {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    align-self: center;
+}
+
+.drop-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: inherit;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin: 0;
+    margin-top: 15px;
+    z-index: 20;
+}
+
+.drop-item {
+    padding: 10px;
+    text-decoration-line: none;
+    text-decoration-style: none;
+    margin: 0;
+    color: #434A54;
+}
