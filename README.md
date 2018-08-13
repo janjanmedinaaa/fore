@@ -134,3 +134,8 @@ Sample strings.json Code
 ```
 
  To call variables, simply add `@key-name` to your Fore file. In calling local variables, you won't need to call the filename group. In this case, calling `@title` in `index.fore` will return the value of `Home Page`. For accessing inner groups such as the `css` object, calling `css.nav-class` would work fine. If a variable is not found in a Local Variable Group, Fore will automatically get the values from Global Variables.
+
+ ## Todo
+ 1. Add Loops.
+ 2. Make Syntax more shorter!
+ 3. Add more features.

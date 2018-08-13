@@ -274,7 +274,8 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 	splitfile := strings.Split(string(dat), "\n")
 	
 	for _, line := range splitfile {
-		line = getvariables(line, filenamefunc(filename))
+		varline := getvariables(line, filenamefunc(filename))
+		line = getvariables(varline, filenamefunc(filename))
 
 		if importcheck == 0 && stylecheck == 0 && scriptcheck == 0 && contentcheck == 0 {
 			switch {
@@ -323,7 +324,9 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 					splitcomp := strings.Split(string(dat), "\n")
 		
 					for _, compline := range splitcomp {
-						compline = getvariables(compline, checkcomponent(line))
+						varcompline := getvariables(compline, checkcomponent(line))
+						compline = getvariables(varcompline, checkcomponent(line))
+
 						content = content + gettabs(line) + compline + "\n"
 					}
 				default: 
