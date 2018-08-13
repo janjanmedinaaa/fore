@@ -184,6 +184,17 @@ func checkvariables(line string) []string {
 	}
 }
 
+func escape(line string) string {
+	line = strings.Replace(line, "$", "&#36;", -1)
+	line = strings.Replace(line, "%", "&#37;", -1)
+	line = strings.Replace(line, "^", "&#94;", -1)
+	line = strings.Replace(line, "`", "&#96;", -1)
+	line = strings.Replace(line, "|", "&#124;", -1)
+	line = strings.Replace(line, "~", "&#126;", -1)
+
+	return line
+}
+
 /****** Get JSON Strings ******/
 
 func getjson(filename string) string {
@@ -258,6 +269,8 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 			}
 		}
 
+		line = escape(line)
+
 		if importcheck == 0 && stylecheck == 0 && scriptcheck == 0 && contentcheck == 0 {
 			switch {
 				case checkimports(line) != "":
@@ -305,6 +318,22 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 					splitcomp := strings.Split(string(dat), "\n")
 		
 					for _, compline := range splitcomp {
+						vars := checkvariables(compline)
+	
+						for _, tempvars := range vars {
+							newvars := strings.Replace(tempvars, "@", "", -1)
+
+							valueGlobal := gjson.Get(stringsfile, newvars)
+							valueLocal := gjson.Get(stringsfile, checkcomponent(line) + "." + newvars)
+
+							if valueLocal.Str != "" {
+								compline = strings.Replace(compline, tempvars, valueLocal.Str, -1)
+							} else if valueGlobal.Str != "" {
+								compline = strings.Replace(compline, tempvars, valueGlobal.Str, -1)
+							}
+						}
+
+						compline = escape(compline)
 						content = content + gettabs(line) + compline + "\n"
 					}
 				default: 
