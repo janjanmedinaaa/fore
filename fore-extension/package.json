@@ -1,0 +1,40 @@
+{
+    "name": "fore-extension",
+    "displayName": "Fore Extension",
+    "description": "This is the Fore Extension",
+    "version": "0.0.1",
+    "publisher": "janjan-medina",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Themes"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "fore",
+            "aliases": ["Fore", "fore"],
+            "extensions": [".fore"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "fore",
+            "scopeName": "source.fore",
+            "path": "./syntaxes/fore.tmLanguage.json"
+        }],
+        "themes": [{
+            "label": "ForeTheme",
+            "uiTheme": "vs",
+            "path": "./themes/fore-theme.json"
+        }],
+        "snippets": [{
+            "language": "fore",
+            "path": "./snippets/fore-snippets.json"
+        }]
+    },
+    "capabilities" : {
+        "documentHighlightProvider" : "true",
+        "hoverProvider" : "true"
+    }
+}

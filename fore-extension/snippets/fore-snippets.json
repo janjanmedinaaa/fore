@@ -1,0 +1,47 @@
+{
+    "Fore Title": {
+        "prefix": "title",
+        "body": [
+            "<title text=\"${@title}\" />"
+        ],
+        "description": "Fore Title Bar"
+    },
+    "Import Script": {
+        "prefix": "script",
+        "body": [
+            "<script type=\"text/javascript\" src=\"${scripturl}\"></script>"
+        ],
+        "description": "Add Script"
+    },
+    "Import CSS": {
+        "prefix": "link",
+        "body": [
+            "<link rel=\"stylesheet\" href=\"${css}\" />"
+        ],
+        "description": "Add CSS"
+    },
+    "Imports": {
+        "prefix": "imports",
+        "body": [
+            "<imports>\n\t<script type=\"text/javascript\" src=\"${scripturl}\"></script>\n</imports>"
+        ]
+    },
+    "Styles": {
+        "prefix": "style",
+        "body": [
+            "<style>\n\t\n</style>"
+        ]
+    },
+    "Scripts": {
+        "prefix": "script",
+        "body": [
+            "<script>\n\t\n</script>"
+        ]
+    },
+    "Content": {
+        "prefix": "content",
+        "body": [
+            "<content>\n\t\n</content>"
+        ]
+    }
+}

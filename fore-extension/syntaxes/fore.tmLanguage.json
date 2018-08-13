@@ -1,0 +1,54 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Fore",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"begin": "",
+			"end": "",
+			"contentName": "entity.name.tag.inline.any.html",
+			"patterns": [
+				{ "include": "text.html.basic" }
+			]
+		},
+		{
+			"begin": "",
+			"end": "",
+			"contentName": "variable.other.php",
+			"patterns": [
+				{ "include": "source.php" }
+			]
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "major.keywords.fore",
+				"match": "(imports|styles|scripts|content)"
+			},{
+				"name": "title.keywords.fore",
+				"match": "(title)"
+			},{
+				"name": "variable.fore",
+				"match": "@([A-Za-z0-9\\-\\_]*)"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.fore",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.fore",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.fore"
+}

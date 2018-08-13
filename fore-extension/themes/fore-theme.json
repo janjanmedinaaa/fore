@@ -1,0 +1,29 @@
+{
+    "name": "ForeTheme",
+    "type": "vs",
+    "colors": {
+        "editor.background": "#1B1B1B",
+        "editor.foreground": "#00BCD4",
+        "editor.lineHighlightBackground": "#313131"
+    },
+    "tokenColors": [
+        {
+            "name": "Fore Variables",
+            "scope": "variable.fore",
+            "settings": {
+                "foreground": "#add",
+                "fontStyle": "bold underline"
+            }
+        },
+        {
+            "name": "Fore Majors",
+            "scope": [
+                "major.keywords.fore",
+                "entity.name.tag.inline.any.fore"
+            ],
+            "settings": {
+                "foreground": "#af3"
+            }
+        }
+    ] 
+}
