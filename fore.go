@@ -321,36 +321,52 @@ func htmlcompile(title string, imports string, styles string, scripts string, co
 
 	importsplit := strings.Split(imports, "\n")
 	for _, line := range importsplit {
-		i = i + "\t" + line + "\n"
+		if i == "" {
+			i = i + "\t" + line
+		} else {
+			i = i + "\n\t" + line
+		}
 	}
 
 	stylessplit := strings.Split(styles, "\n")
 	for _, line := range stylessplit {
-		s = s + "\t" + line + "\n"
+		if s == "" {
+			s = s + "\t" + line
+		} else {
+			s = s + "\n\t\t" + line
+		}
 	}
 
 	scriptsplit := strings.Split(scripts, "\n")
 	for _, line := range scriptsplit {
-		sc = sc + "\t" + line + "\n"
+		if sc == "" {
+			sc = sc + "\t" + line
+		} else {
+			sc = sc + "\n\t\t" + line
+		}
 	}
 
 	contentsplit := strings.Split(content, "\n")
 	for _, line := range contentsplit {
-		c = c + "\t" + line + "\n"
+		if c == "" {
+			c = c + "\t" + line
+		} else {
+			c = c + "\n\t" + line
+		}
 	}
 
 	html := "<html>\n\t<head>\n"
 	html = html + "\t\t<title>" + title + "</title>\n"
 
 	if imports != "" { html = html + i }
-	if styles != "" { html = html + "\t<style>\n" + s + "\t</style>\n" }
+	if styles != "" { html = html + "\t\t<style>\n\t" + s + "</style>\n" }
 
 	html = html + "\t</head>\n\t<body>\n"
 
-	if scripts != "" { html = html + "\t\t<script>\n" + sc + "\t\t</script>\n"}
+	if scripts != "" { html = html + "\t\t<script>\n\t" + sc + "</script>\n"}
 	if content != "" { html = html + c }
 
-	html = html + "\t</body>\n</html>"
+	html = html + "</body>\n</html>"
 	
 	genfile(genhtmlfile, html)
 }
