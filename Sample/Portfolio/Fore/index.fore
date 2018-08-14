@@ -9,7 +9,7 @@
     <script src="../js/index.js"></script>
 </imports>
 
-<content>
+<content />
     <Message />
     <Navbar />
     <div id="mainContainer">
@@ -25,4 +25,3 @@
         <Contact />
         <Footer />
     </div>
-</content>
