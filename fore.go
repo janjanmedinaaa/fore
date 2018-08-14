@@ -69,9 +69,12 @@ func watch() {
 		for {
 			select {
 			case event := <-w.Event:	
-				//Kasi nagcoconflict yung compile(), nababasa as new event
-				//So bawal na imanual update yung html.
-				//To change html files, manual compile needed
+				/*
+				* Kasi nagcoconflict yung compile(), nababasa as new event
+				* So bawal na imanual update yung html.
+				* To change html files, manual compile needed
+				*/
+				
 				if filetypefunc(event.Path) != "html" {
 					compile()
 					fmt.Println(event.Path + " saved. -", time.Now().Format(time.RFC850))
@@ -149,27 +152,19 @@ func checkcomponent(line string) string {
 	}
 }
 
-func checkimports(line string) string {
-	//Check if file line is a start or finish of an import statement
-	match, _ := regexp.Compile("<[/]*imports>")
-    return match.FindString(line)
+func checkcollection(line string) string {
+	//Check if file line is a start or finish of a collection
+	match, _ := regexp.Compile("<[/]*(content|logic|style|imports)[\\s/]*>")
+
+	if(len(match.FindStringSubmatch(line)) > 0) {
+		return match.FindStringSubmatch(line)[1]
+	} else {
+		return match.FindString(line)
+	}
 }
 
-func checkstyles(line string) string {
-	//Check if file line is a start or finish of styles
-	match, _ := regexp.Compile("<[/]*style>")
-    return match.FindString(line)
-}
-
-func checkscripts(line string) string {
-	//Check if file line is a start or finish of an import statement
-	match, _ := regexp.Compile("<[/]*script>")
-    return match.FindString(line)
-}
-
-func checkcontent(line string) string {
-	//Check if file line is a start or finish of styles
-	match, _ := regexp.Compile("<[/]*content>")
+func checkendtag(line string) string {
+	match, _ := regexp.Compile("</(content|logic|style|imports)>")
     return match.FindString(line)
 }
 
@@ -277,60 +272,87 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 		varline := getvariables(line, filenamefunc(filename))
 		line = getvariables(varline, filenamefunc(filename))
 
+		// This runs on start when all checkers still have a default value (0),
+		// Checks if a string is a starting tag of a collection, else does nothing
 		if importcheck == 0 && stylecheck == 0 && scriptcheck == 0 && contentcheck == 0 {
-			switch {
-				case checkimports(line) != "":
+			switch checkcollection(line) {
+				case "imports":
 					importcheck = 1
-				case checkstyles(line) != "":
+				case "style":
 					stylecheck = 1
-				case checkscripts(line) != "":
+				case "logic":
 					scriptcheck = 1
-				case checkcontent(line) != "":
+				case "content":
 					contentcheck = 1
-				case checktitle(line) != "":
-					title = checktitle(line)
+				default:
+					if checktitle(line) != "" { title = checktitle(line) }
 			}
-		} else if importcheck == 1 {
-			switch {
-				case checkimports(line) != "":
-					importcheck = 0
-				default: 
-					imports = imports + line + "\n"
-			}
-		} else if stylecheck == 1 {
-			switch {
-				case checkstyles(line) != "":
-					stylecheck = 0
-				default: 
-					styles = styles + line + "\n"
-			}
-		} else if scriptcheck == 1 {
-			switch {
-				case checkscripts(line) != "":
-					scriptcheck = 0
-				default: 
-					scripts = scripts + line + "\n"
-			}
-		} else if contentcheck == 1 {
-			switch {
-				case checkcontent(line) != "":
-					contentcheck = 0
-				case checkcomponent(line) != "":
-					dat, err := ioutil.ReadFile(pwd + "/Components/" + checkcomponent(line) + ".fore")
-					if err != nil {
-						content = content + gettabs(line) + "<ComponentNotFound />"
-					}
-		
-					splitcomp := strings.Split(string(dat), "\n")
-		
-					for _, compline := range splitcomp {
-						varcompline := getvariables(compline, checkcomponent(line))
-						compline = getvariables(varcompline, checkcomponent(line))
+		} else {
+			/* 
+			* So if one checker has a value of 1, this means it has 
+			* already found a starting tag for the collection. 
+			* So first we need to check if the line has a starting
+			* tag or ending tag. If the line is an ending tag, return the 
+			* checker value to 0, else it is a starting tag, changing 
+			* the other checkers to 0 and changing the starting tag checker to 1
+			* If the line doesn't have a starting or ending tag, it 
+			* checks the line if not empty and adds it to the string it is connected to. 
+			*/
 
-						content = content + gettabs(line) + compline + "\n"
-					}
-				default: 
-					content = content + line + "\n"
+			if checkcollection(line) != "" {
+				switch checkcollection(line) {
+					case "imports":
+						if checkendtag(line) != "" {
+							importcheck = 0
+						} else {
+							importcheck, stylecheck, scriptcheck, contentcheck = 1, 0, 0, 0
+						}
+					case "style":
+						if checkendtag(line) != "" {
+							stylecheck = 0
+						} else {
+							importcheck, stylecheck, scriptcheck, contentcheck = 0, 1, 0, 0
+						}
+					case "logic":
+						if checkendtag(line) != "" {
+							scriptcheck = 0
+						} else {
+							importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 1, 0
+						}
+					case "content":
+						if checkendtag(line) != "" {
+							contentcheck = 0
+						} else {
+							importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 0, 1
+						}
+					default:
+						if checktitle(line) != "" { title = checktitle(line) }
+				}
+			} else if importcheck == 1 {
+				if line != "" { imports = imports + line + "\n" }
+			} else if stylecheck == 1 {
+				if line != "" { styles = styles + line + "\n" }
+			} else if scriptcheck == 1 {
+				if line != "" { scripts = scripts + line + "\n" }
+			} else if contentcheck == 1 {
+				switch {
+					case checkcomponent(line) != "":
+						dat, err := ioutil.ReadFile(pwd + "/Components/" + checkcomponent(line) + ".fore")
+						if err != nil {
+							content = content + gettabs(line) + "<ComponentNotFound />"
+						}
+			
+						splitcomp := strings.Split(string(dat), "\n")
+			
+						for _, compline := range splitcomp {
+							varcompline := getvariables(compline, checkcomponent(line))
+							compline = getvariables(varcompline, checkcomponent(line))
+	
+							content = content + gettabs(line) + compline + "\n"
+						}
+					case line != "": 
+						content = content + line + "\n"
+				}
 			}
 		}
 	}
