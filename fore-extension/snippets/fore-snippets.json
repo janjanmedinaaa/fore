@@ -1,8 +1,14 @@
 {
+    "Fore": {
+        "prefix": "fore",
+        "body": [
+            "<title text=\"@title\" />\n\n<imports>\n\t<script type=\"text/javascript\" src=\"${scripturl}\"></script>\n</imports>\n\n<style>\n\t\n</style>\n\n<script>\n\t\n</script>\n\n<content>\n\t\n</content>"
+        ]
+    },
     "Fore Title": {
         "prefix": "title",
         "body": [
-            "<title text=\"${@title}\" />"
+            "<title text=\"@title\" />"
         ],
         "description": "Fore Title Bar"
     },
