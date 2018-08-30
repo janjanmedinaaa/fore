@@ -35,7 +35,7 @@ func compile() {
 	//Loop to each file in current directory
 	for _, f := range files {
 		if filetypefunc(f.Name()) == "fore" {
-			title, imports, styles, scripts, content, genhtmlfile := readfile(pwd(), f.Name())
+			title, imports, styles, scripts, content, genhtmlfile := forefile(pwd(), f.Name())
 
 			htmlcompile(title, imports, styles, scripts, content, genhtmlfile)
 		}
@@ -143,9 +143,9 @@ func checktitle(line string) string {
 
 	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
-	} else {
-		return match.FindString(line)
 	}
+
+	return match.FindString(line)
 }
 
 func checkcomponent(line string) string {
@@ -154,9 +154,9 @@ func checkcomponent(line string) string {
 
 	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
-	} else {
-		return match.FindString(line)
 	}
+
+	return match.FindString(line)
 }
 
 func checkcollection(line string) string {
@@ -165,9 +165,10 @@ func checkcollection(line string) string {
 
 	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
-	} else {
-		return match.FindString(line)
 	}
+
+	return match.FindString(line)
+
 }
 
 func checkendtag(line string) string {
@@ -181,9 +182,9 @@ func checkvariables(line string) []string {
 
 	if len(match.FindAllString(line, -1)) > 0 {
 		return match.FindAllString(line, -1)
-	} else {
-		return make([]string, 0)
 	}
+
+	return make([]string, 0)
 }
 
 func escape(line string) string {
@@ -263,17 +264,24 @@ func genfile(filename string, content string) {
 	fmt.Fprintf(file, content)
 }
 
+/****** Read File ******/
+
+func readfile(file string) string {
+	dat, _ := ioutil.ReadFile(file)
+	return string(dat)
+}
+
 /****** Read Fore File ******/
 
-func readfile(pwd string, filename string) (string, string, string, string, string, string) {
+func forefile(pwd string, filename string) (string, string, string, string, string, string) {
 	title, imports, styles, scripts, content := "", "", "", "", ""
 	importcheck, stylecheck, scriptcheck, contentcheck := 0, 0, 0, 0
 
 	genhtmlfile := "Project/html/" + filenamefunc(filename) + ".html"
 
-	dat, _ := ioutil.ReadFile(pwd + "/Fore/" + filename)
+	filecontents := readfile(pwd + "/Fore/" + filename)
 
-	splitfile := strings.Split(string(dat), "\n")
+	splitfile := strings.Split(filecontents, "\n")
 
 	for _, line := range splitfile {
 		varline := getvariables(line, filenamefunc(filename))
@@ -440,7 +448,7 @@ func htmlcompile(title string, imports string, styles string, scripts string, co
 	genfile(genhtmlfile, html)
 }
 
-/* End for Fore Functions */
+/* End of Fore Functions */
 
 /*
  * Fore EzSS Functions
@@ -448,8 +456,201 @@ func htmlcompile(title string, imports string, styles string, scripts string, co
  * EzSS allows auto-generation of CSS Files based on HTML Classes
  * and Ids using CSS Best Practices. EzSS also allows CSS Compression.
  * EzSS Functions also uses some of Fore's Functions like
- * genfile(), pwd(), and escape()
+ * genfile(), pwd(), and escape().
  */
+
+/* Creates and returns comments based on Input type and names */
+
+func makecomments(category string, name string) string {
+	comment := ""
+
+	switch category {
+	case "info":
+		comment += "/*\n"
+		comment += "\t!!!DON'T FORGET TO UPDATE THESE INFORMATION!!!\n"
+		comment += "\tFilename: index.html\n"
+		comment += "\tAuthor: Janjan Medina\n"
+		comment += "\tAuthor URI: https://github.com/medinajuanantonio95\n"
+		comment += "\tProject: " + pwd() + "\n"
+		comment += "*/\n\n"
+		break
+	case "general":
+		comment = "/***** General Styles *****/\n\n"
+		break
+	case "header":
+		comment = "/***** Header Style *****/\n\n"
+		break
+	case "footer":
+		comment = "/***** Footer Style *****/\n\n"
+		break
+	case "nav":
+		comment = "/***** Navigation Style *****/\n\n"
+		break
+	case "basic":
+		comment = "/***** " + name + " *****/\n\n"
+		break
+	default:
+		comment = "/* Comment type unknown */\n\n"
+	}
+
+	return comment
+}
+
+/* Add Media Queries */
+
+func mediaqueries() string {
+	mediaqueries := ""
+
+	mediaqueries += "/* Small devices (tablets, 768px and up) */\n\n"
+	mediaqueries += "@media (min-width: 768px) {\n\n}\n\n"
+	mediaqueries += "/* Small devices (desktops, 992px and up) */\n\n"
+	mediaqueries += "@media (min-width: 992px) {\n\n}\n\n"
+	mediaqueries += "/* Small devices (large desktops, 1200px and up) */\n\n"
+	mediaqueries += "@media (min-width: 1200px) {\n\n}\n\n"
+
+	return mediaqueries
+}
+
+/* Add CSS for Body */
+
+func bodycss() string {
+	return "body {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n}\n\n"
+}
+
+/* Add CSS Function */
+
+func cssfunc(name string, category string) string {
+	classifier := ""
+
+	if category == "id" {
+		classifier = "#"
+	} else {
+		classifier = "."
+	}
+
+	defString := " {\n\n}\n\n"
+
+	output := classifier + name + defString
+
+	return output
+}
+
+/* Add Import to HTML File */
+
+func addimport(filename string) string {
+	return "<link rel=\"stylesheet\" href=\"" + filename + "\" />"
+}
+
+/* Getting Classes for one line with Regex */
+
+func getclasses(line string) string {
+	//Check if file line has a class
+	match, _ := regexp.Compile("class=\"([a-zA-Z0-9\\s-\\_]*)\"")
+
+	if len(match.FindStringSubmatch(line)) > 0 {
+		return match.FindStringSubmatch(line)[1]
+	}
+
+	return match.FindString(line)
+}
+
+/* Getting Ids for one line with Regex */
+
+func getids(line string) string {
+	//Check if file line has a class
+	match, _ := regexp.Compile("id=\"([a-zA-Z0-9\\s-]*)\"")
+
+	if len(match.FindStringSubmatch(line)) > 0 {
+		return match.FindStringSubmatch(line)[1]
+	}
+
+	return match.FindString(line)
+}
+
+/* Get CSS Ids and Classes */
+
+func csscontent(filename string) ([]string, []string) {
+	classes := make([]string, 1) //Define Slices to put Classes and Ids
+	ids := make([]string, 1)
+
+	filecontents := readfile(pwd() + "\\" + filename) //Read HTML File
+	splitfile := strings.Split(filecontents, "\n")    //Split HTML File to lines
+
+	for _, line := range splitfile {
+		lclasses := getclasses(line) //Get Classes and IDs of a line
+		lids := getids(line)
+
+		splitclasses := strings.Split(lclasses, " ")
+		splitids := strings.Split(lids, " ")
+
+		/*
+		 * All the results got from the classes and ids
+		 * function, it will get split by "\n" and will get pushed
+		 * to the overall slices (classes and ids)
+		 * and what will be return as output
+		 */
+
+		for _, class := range splitclasses {
+			if class != "" {
+				classes = append(classes, escape(class))
+			}
+		}
+
+		for _, id := range splitids {
+			if id != "" {
+				ids = append(ids, escape(id))
+			}
+		}
+	}
+
+	return classes, ids
+}
+
+func makecontent(classes []string, ids []string) string {
+	compiled := ""
+
+	compiled += makecomments("info", "")
+	compiled += makecomments("general", "") + bodycss()
+
+	for a := 0; a < len(ids); a++ {
+		if escape(ids[a]) != "" {
+			switch escape(ids[a]) {
+			case "header":
+				compiled += makecomments("header", escape(ids[a]))
+				break
+			case "footer":
+				compiled += makecomments("footer", escape(ids[a]))
+				break
+			case "nav":
+				compiled += makecomments("nav", escape(ids[a]))
+				break
+			default:
+				compiled += makecomments("basic", escape(ids[a]))
+			}
+
+			compiled += cssfunc(escape(ids[a]), "id")
+		}
+	}
+
+	for b := 0; b < len(classes); b++ {
+		if escape(classes[b]) != "" {
+			compiled += cssfunc(escape(classes[b]), "classes")
+		}
+	}
+
+	compiled += mediaqueries()
+
+	return compiled
+}
+
+func makecss(filename string) {
+	a, b := csscontent(filename)
+	content := makecontent(a, b)
+
+	genfile(filenamefunc(filename)+".css", content)
+}
+
+/* End of EzSS Functions */
 
 func main() {
 	if len(os.Args) > 1 {
@@ -465,17 +666,17 @@ func main() {
 		case "ezss": //EzSS Integration
 			switch os.Args[2] {
 			case "create":
-
+				makecss(os.Args[3])
 			case "generate":
-
+				makecss(os.Args[3])
 			case "gen":
-
+				makecss(os.Args[3])
 			case "compress":
-
+				fmt.Println("EzSS Compress still not available.")
 			case "comp":
-
+				fmt.Println("EzSS Compress still not available.")
 			case "read":
-
+				fmt.Println(readfile(os.Args[3]))
 			default:
 				fmt.Println("Fore EzSS: Command not found.")
 			}
