@@ -2,16 +2,23 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"io/ioutil"
-	"strings"
-	"regexp"
 	"log"
+	"os"
+	"regexp"
+	"strings"
 	"time"
-	
+
 	"github.com/radovskyb/watcher"
 	"github.com/tidwall/gjson"
 )
+
+/*
+ * Fore Functions
+ * Fore Template Engine is designed to remove code repetition
+ * and planned to make revisions faster and easier by using Fore
+ * Components and Global or Local Variables.
+ */
 
 /****** fore home ******/
 
@@ -24,7 +31,7 @@ func home() {
 func compile() {
 	//Get Files of current directory
 	files, _ := ioutil.ReadDir(pwd() + "/Fore")
-			
+
 	//Loop to each file in current directory
 	for _, f := range files {
 		if filetypefunc(f.Name()) == "fore" {
@@ -49,7 +56,7 @@ func initrun() {
 	gendir("Project/js")
 	gendir("Project/assets")
 
-	//Generate strings.json for global 
+	//Generate strings.json for global
 	//and reusable variable strings
 	genfile("strings.json", "{\n\t\"title\": \"My Project\"\n}")
 	genfile("package.json", "")
@@ -64,20 +71,20 @@ func watch() {
 	w.SetMaxEvents(1)
 
 	fmt.Println("Fore Watcher Started")
-	
+
 	go func() {
 		for {
 			select {
-			case event := <-w.Event:	
+			case event := <-w.Event:
 				/*
 				* Kasi nagcoconflict yung compile(), nababasa as new event
 				* So bawal na imanual update yung html.
 				* To change html files, manual compile needed
-				*/
-				
+				 */
+
 				if filetypefunc(event.Path) != "html" {
 					compile()
-					fmt.Println(event.Path + " saved. -", time.Now().Format(time.RFC850))
+					fmt.Println(event.Path+" saved. -", time.Now().Format(time.RFC850))
 				}
 			case err := <-w.Error:
 				log.Fatalln(err)
@@ -107,9 +114,9 @@ func filenamefunc(filename string) string {
 
 	for a := 0; a < len(split)-1; a++ {
 		if output == "" {
-			output = output + split[a] 
+			output = output + split[a]
 		} else {
-			output = output + "." + split[a] 
+			output = output + "." + split[a]
 		}
 	}
 
@@ -127,14 +134,14 @@ func filetypefunc(filename string) string {
 func gettabs(line string) string {
 	//Gets the tabs to add before a string
 	match, _ := regexp.Compile("[\\s\t]*")
-    return match.FindString(line)
+	return match.FindString(line)
 }
 
 func checktitle(line string) string {
 	//Check if file line is a Title Component
 	match, _ := regexp.Compile("<title[\\s]*text=\"([A-Za-z0-9\\s]*)\"[\\s]*/>")
-    
-	if(len(match.FindStringSubmatch(line)) > 0) {
+
+	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
 	} else {
 		return match.FindString(line)
@@ -145,7 +152,7 @@ func checkcomponent(line string) string {
 	//Check if file line has a Custom Component
 	match, _ := regexp.Compile("<([A-Z][A-Za-z0-9\\-\\_]*)[\\s]*/>")
 
-	if(len(match.FindStringSubmatch(line)) > 0) {
+	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
 	} else {
 		return match.FindString(line)
@@ -156,7 +163,7 @@ func checkcollection(line string) string {
 	//Check if file line is a start or finish of a collection
 	match, _ := regexp.Compile("<[/]*(content|logic|style|imports)[\\s/]*>")
 
-	if(len(match.FindStringSubmatch(line)) > 0) {
+	if len(match.FindStringSubmatch(line)) > 0 {
 		return match.FindStringSubmatch(line)[1]
 	} else {
 		return match.FindString(line)
@@ -165,14 +172,14 @@ func checkcollection(line string) string {
 
 func checkendtag(line string) string {
 	match, _ := regexp.Compile("</(content|logic|style|imports)>")
-    return match.FindString(line)
+	return match.FindString(line)
 }
 
 func checkvariables(line string) []string {
 	//Check if file line has a variable
 	match, _ := regexp.Compile("@([A-Za-z0-9\\-\\_]*)")
 
-	if(len(match.FindAllString(line, -1)) > 0) {
+	if len(match.FindAllString(line, -1)) > 0 {
 		return match.FindAllString(line, -1)
 	} else {
 		return make([]string, 0)
@@ -204,7 +211,7 @@ func getjson(filename string) string {
 func getvariables(line string, keyname string) string {
 	stringsfile := getjson("strings.json")
 	vars := checkvariables(line)
-	
+
 	for _, tempvars := range vars {
 		//This removes the @ symbol of the variable
 		newvars := strings.Replace(tempvars, "@", "", -1)
@@ -212,7 +219,7 @@ func getvariables(line string, keyname string) string {
 		// Checks if variable name (strings) has an equivalent
 		// Key in the JSON File (stringsfile)
 		valueGlobal := gjson.Get(stringsfile, newvars)
-		valueLocal := gjson.Get(stringsfile, keyname + "." + newvars)
+		valueLocal := gjson.Get(stringsfile, keyname+"."+newvars)
 
 		//So if value is not null (meaning it has an equivalent)
 		if valueLocal.Str != "" {
@@ -228,10 +235,10 @@ func getvariables(line string, keyname string) string {
 
 /****** Get Current Working Directory ******/
 
-func pwd() string{
+func pwd() string {
 	//Gets current working directory
 	dir, _ := os.Getwd()
-	
+
 	//returns working directory
 	return dir
 }
@@ -241,7 +248,7 @@ func pwd() string{
 func gendir(dirname string) {
 	//choose your permissions well
 	pathErr := os.Mkdir(dirname, 0777)
- 
+
 	//check if you need to panic, fallback or report
 	if pathErr != nil {
 		fmt.Println(pathErr)
@@ -252,14 +259,14 @@ func gendir(dirname string) {
 
 func genfile(filename string, content string) {
 	file, _ := os.Create(filename)
-    defer file.Close()
+	defer file.Close()
 	fmt.Fprintf(file, content)
 }
 
 /****** Read Fore File ******/
 
-func readfile(pwd string, filename string) (string, string, string, string, string, string){
-	title, imports, styles, scripts, content := "", "", "", "", ""	
+func readfile(pwd string, filename string) (string, string, string, string, string, string) {
+	title, imports, styles, scripts, content := "", "", "", "", ""
 	importcheck, stylecheck, scriptcheck, contentcheck := 0, 0, 0, 0
 
 	genhtmlfile := "Project/html/" + filenamefunc(filename) + ".html"
@@ -267,7 +274,7 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 	dat, _ := ioutil.ReadFile(pwd + "/Fore/" + filename)
 
 	splitfile := strings.Split(string(dat), "\n")
-	
+
 	for _, line := range splitfile {
 		varline := getvariables(line, filenamefunc(filename))
 		line = getvariables(varline, filenamefunc(filename))
@@ -276,82 +283,92 @@ func readfile(pwd string, filename string) (string, string, string, string, stri
 		// Checks if a string is a starting tag of a collection, else does nothing
 		if importcheck == 0 && stylecheck == 0 && scriptcheck == 0 && contentcheck == 0 {
 			switch checkcollection(line) {
-				case "imports":
-					importcheck = 1
-				case "style":
-					stylecheck = 1
-				case "logic":
-					scriptcheck = 1
-				case "content":
-					contentcheck = 1
-				default:
-					if checktitle(line) != "" { title = checktitle(line) }
+			case "imports":
+				importcheck = 1
+			case "style":
+				stylecheck = 1
+			case "logic":
+				scriptcheck = 1
+			case "content":
+				contentcheck = 1
+			default:
+				if checktitle(line) != "" {
+					title = checktitle(line)
+				}
 			}
 		} else {
-			/* 
-			* So if one checker has a value of 1, this means it has 
-			* already found a starting tag for the collection. 
-			* So first we need to check if the line has a starting
-			* tag or ending tag. If the line is an ending tag, return the 
-			* checker value to 0, else it is a starting tag, changing 
-			* the other checkers to 0 and changing the starting tag checker to 1
-			* If the line doesn't have a starting or ending tag, it 
-			* checks the line if not empty and adds it to the string it is connected to. 
-			*/
+			/*
+			 * So if one checker has a value of 1, this means it has
+			 * already found a starting tag for the collection.
+			 * So first we need to check if the line has a starting
+			 * tag or ending tag. If the line is an ending tag, return the
+			 * checker value to 0, else it is a starting tag, changing
+			 * the other checkers to 0 and changing the starting tag checker to 1
+			 * If the line doesn't have a starting or ending tag, it
+			 * checks the line if not empty and adds it to the string it is connected to.
+			 */
 
 			if checkcollection(line) != "" {
 				switch checkcollection(line) {
-					case "imports":
-						if checkendtag(line) != "" {
-							importcheck = 0
-						} else {
-							importcheck, stylecheck, scriptcheck, contentcheck = 1, 0, 0, 0
-						}
-					case "style":
-						if checkendtag(line) != "" {
-							stylecheck = 0
-						} else {
-							importcheck, stylecheck, scriptcheck, contentcheck = 0, 1, 0, 0
-						}
-					case "logic":
-						if checkendtag(line) != "" {
-							scriptcheck = 0
-						} else {
-							importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 1, 0
-						}
-					case "content":
-						if checkendtag(line) != "" {
-							contentcheck = 0
-						} else {
-							importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 0, 1
-						}
-					default:
-						if checktitle(line) != "" { title = checktitle(line) }
+				case "imports":
+					if checkendtag(line) != "" {
+						importcheck = 0
+					} else {
+						importcheck, stylecheck, scriptcheck, contentcheck = 1, 0, 0, 0
+					}
+				case "style":
+					if checkendtag(line) != "" {
+						stylecheck = 0
+					} else {
+						importcheck, stylecheck, scriptcheck, contentcheck = 0, 1, 0, 0
+					}
+				case "logic":
+					if checkendtag(line) != "" {
+						scriptcheck = 0
+					} else {
+						importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 1, 0
+					}
+				case "content":
+					if checkendtag(line) != "" {
+						contentcheck = 0
+					} else {
+						importcheck, stylecheck, scriptcheck, contentcheck = 0, 0, 0, 1
+					}
+				default:
+					if checktitle(line) != "" {
+						title = checktitle(line)
+					}
 				}
 			} else if importcheck == 1 {
-				if line != "" { imports = imports + line + "\n" }
+				if line != "" {
+					imports = imports + line + "\n"
+				}
 			} else if stylecheck == 1 {
-				if line != "" { styles = styles + line + "\n" }
+				if line != "" {
+					styles = styles + line + "\n"
+				}
 			} else if scriptcheck == 1 {
-				if line != "" { scripts = scripts + line + "\n" }
+				if line != "" {
+					scripts = scripts + line + "\n"
+				}
 			} else if contentcheck == 1 {
 				switch {
-					case checkcomponent(line) != "":
-						dat, err := ioutil.ReadFile(pwd + "/Components/" + checkcomponent(line) + ".fore")
-						if err != nil {
-							content = content + gettabs(line) + "<ComponentNotFound />"
-						}
-			
-						splitcomp := strings.Split(string(dat), "\n")
-			
-						for _, compline := range splitcomp {
-							varcompline := getvariables(compline, checkcomponent(line))
-							compline = getvariables(varcompline, checkcomponent(line))
-	
-							content = content + gettabs(line) + compline + "\n"
-						}
-					case line != "": 
-						content = content + line + "\n"
+				case checkcomponent(line) != "":
+					dat, err := ioutil.ReadFile(pwd + "/Components/" + checkcomponent(line) + ".fore")
+					if err != nil {
+						content = content + gettabs(line) + "<ComponentNotFound />"
+					}
+
+					splitcomp := strings.Split(string(dat), "\n")
+
+					for _, compline := range splitcomp {
+						varcompline := getvariables(compline, checkcomponent(line))
+						compline = getvariables(varcompline, checkcomponent(line))
+
+						content = content + gettabs(line) + compline + "\n"
+					}
+				case line != "":
+					content = content + line + "\n"
 				}
 			}
 		}
@@ -402,32 +419,68 @@ func htmlcompile(title string, imports string, styles string, scripts string, co
 	html := "<html>\n\t<head>\n"
 	html = html + "\t\t<title>" + title + "</title>\n"
 
-	if imports != "" { html = html + i }
-	if styles != "" { html = html + "\t\t<style>\n\t" + s + "</style>\n" }
+	if imports != "" {
+		html = html + i
+	}
+	if styles != "" {
+		html = html + "\t\t<style>\n\t" + s + "</style>\n"
+	}
 
 	html = html + "\t</head>\n\t<body>\n"
 
-	if scripts != "" { html = html + "\t\t<script>\n\t" + sc + "</script>\n"}
-	if content != "" { html = html + c }
+	if scripts != "" {
+		html = html + "\t\t<script>\n\t" + sc + "</script>\n"
+	}
+	if content != "" {
+		html = html + c
+	}
 
 	html = html + "</body>\n</html>"
-	
+
 	genfile(genhtmlfile, html)
 }
+
+/* End for Fore Functions */
+
+/*
+ * Fore EzSS Functions
+ * EzSS is a CLI tool for creating and compressing CSS Files.
+ * EzSS allows auto-generation of CSS Files based on HTML Classes
+ * and Ids using CSS Best Practices. EzSS also allows CSS Compression.
+ * EzSS Functions also uses some of Fore's Functions like
+ * genfile(), pwd(), and escape()
+ */
 
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
-			case "init":
-				initrun()
-			case "compile", "comp":
-				compile()
-			case "watch", "watcher":
-				watch()
-			case "version":
-				fmt.Println("Fore v1.0.0")
-			default: 
-				fmt.Println("Fore: Command not found.")
+		case "init":
+			initrun()
+		case "compile", "comp":
+			compile()
+		case "watch", "watcher":
+			watch()
+		case "version":
+			home()
+		case "ezss": //EzSS Integration
+			switch os.Args[2] {
+			case "create":
+
+			case "generate":
+
+			case "gen":
+
+			case "compress":
+
+			case "comp":
+
+			case "read":
+
+			default:
+				fmt.Println("Fore EzSS: Command not found.")
+			}
+		default:
+			fmt.Println("Fore: Command not found.")
 		}
 	} else {
 		home()
