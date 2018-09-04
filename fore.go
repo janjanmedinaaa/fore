@@ -66,6 +66,29 @@ func initrun() {
 	fmt.Println("Fore Project Initialized.")
 }
 
+func htmlproject(project string) {
+	//File Contents
+	html := "<html>\n\t<head>\n\t\t<title>" + //HTML File Content
+		project + "</title>\n\t</head>\n\t<body>\n\n\n\t</body>\n</html>"
+	var compiled string
+
+	compiled += makecomments("info", "") //CSS File Content
+	compiled += makecomments("general", "") + bodycss()
+
+	//Generate Project Main Folder
+	gendir(project)
+
+	//Generate Subfolders
+	gendir(project + "/html")
+	gendir(project + "/css")
+	gendir(project + "/js")
+	gendir(project + "/assets")
+
+	//Generate Files
+	genfile(project+"/html/index.html", html)
+	genfile(project+"/css/index.css", compiled)
+}
+
 func watch() {
 	w := watcher.New()
 	w.SetMaxEvents(1)
@@ -663,6 +686,12 @@ func main() {
 			watch()
 		case "version":
 			home()
+		case "html":
+			if len(os.Args) > 2 {
+				htmlproject(os.Args[2])
+			} else {
+				htmlproject("My Project")
+			}
 		case "ezss": //EzSS Integration
 			switch os.Args[2] {
 			case "create":
